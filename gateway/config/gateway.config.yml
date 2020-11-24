@@ -7,9 +7,14 @@ apiEndpoints:
   logsEndpoint:
     host: localhost
     paths: '/listar/logs*'
+  galponEndponit:
+    host: localhost
+    paths: '/listar/muestras*'
 serviceEndpoints:
   logservice:
      url: 'http://localhost:9000'
+  galponservice:
+     url:  'http://localhost:6000'
 policies:
   - basic-auth
   - cors
@@ -27,4 +32,12 @@ pipelines:
         - proxy:
             - action:
                 serviceEndpoint: logservice
+                changeOrigin: true
+ galponPipeline:
+      apiEndpoints:
+        - galponEndpoint
+      policies:
+        - proxy:
+            - action:
+                serviceEndpoint: galponservice
                 changeOrigin: true

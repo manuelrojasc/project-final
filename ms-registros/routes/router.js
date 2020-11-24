@@ -4,8 +4,15 @@ const router=express.Router()
 const modelos=require('../db/db')
 const service=require('../services/kafka')
 const topic1=service.topic1()
+const topic2=service.topic2()
 
 topic1.on('message',async function(message){
+    const data= JSON.parse(message.value)
+    var log = new modelos.logModel(data);
+        var result = await log.save();
+    console.log(result)
+})
+topic2.on('message',async function(message){
     const data= JSON.parse(message.value)
     var log = new modelos.logModel(data);
         var result = await log.save();

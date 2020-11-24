@@ -12,7 +12,6 @@ mongoose.connect(uri, {
 
 const waterModel = mongoose.model("food", {
     cod_water: String,
-    name: String,
     quantity: String
 });
 
